@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.validation.Valid;
+import jp.co.metateam.library.model.Account;
+import jp.co.metateam.library.model.AccountDto;
 import jp.co.metateam.library.model.BookMst;
 import jp.co.metateam.library.model.BookMstDto;
 import jp.co.metateam.library.service.BookMstService;
@@ -50,5 +52,47 @@ public class BookController {
 
         return "book/add";
     }
-    
+
+     @PostMapping("/book/add")
+    public String register(@Valid @ModelAttribute BookMstDto bookMstDto, BindingResult result, RedirectAttributes ra) {
+
+        String titleCheck = bookMstDto.getTitle();
+        String isbnCheck = bookMstDto.getIsbn();
+        
+        //タイトル必須
+        if (titleCheck == null || titleCheck.isEmpty()) {
+            result.rejectValue("title", "required", "書籍名は必須です");
+        }
+        //ISBN必須
+        if (isbnCheck == null || isbnCheck.isEmpty()) {
+            result.rejectValue("isbn", "required", "ISBNは必須です");
+        } else {
+            //タイトル文字数
+            if (titleCheck.length() >= 255) {
+            result.rejectValue("title", "length", "書籍名は255字以内で入力してください");
+            } else {
+            //ISBN桁数チェック
+            if (isbnCheck.length() != 13) {
+            result.rejectValue("isbn", "length", "ISBNは13桁で入力してください");
+            }
+            //ISBN半角数字チェック
+            if (!isbnCheck.matches("\\d+")) {
+            result.rejectValue("isbn", "format", "ISBNは半角数字で入力してください");
+            } else {
+                //ISBN重複チェック
+                if (bookMstService.isbnExists(isbnCheck)) {
+                result.rejectValue("isbn", "duplicate", "このISBNは既に登録されています");
+                }
+            }
+        }
+    }
+
+        if (result.hasErrors()) {
+            return "book/add";
+        }
+
+        bookMstService.save(bookMstDto);
+
+        return "redirect:/book/index";
+        }
 }
