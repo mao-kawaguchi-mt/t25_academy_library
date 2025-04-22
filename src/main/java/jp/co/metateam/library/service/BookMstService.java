@@ -58,5 +58,4 @@ public class BookMstService {
     public boolean isbnExists(String isbn) {
         return bookMstRepository.existsByIsbn(isbn);
     }
-    
 }
