@@ -8,9 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import io.micrometer.common.util.StringUtils;
+import jakarta.validation.Valid;
+import jp.co.metateam.library.model.AccountDto;
 import jp.co.metateam.library.model.BookMst;
 import jp.co.metateam.library.model.BookMstDto;
 import jp.co.metateam.library.repository.BookMstRepository;
@@ -42,8 +47,16 @@ public class BookMstService {
 
         return bookMstDtoList;
     }
+
+    public void save(BookMstDto bookMstDto) {
+        BookMst bookMst = new BookMst();
+        bookMst.setTitle(bookMstDto.getTitle());
+        bookMst.setIsbn(bookMstDto.getIsbn());
+        bookMstRepository.save(bookMst);
+    }
+    
+    public boolean isbnExists(String isbn) {
+        return bookMstRepository.existsByIsbn(isbn);
+    }
     
 }
-
-
-
