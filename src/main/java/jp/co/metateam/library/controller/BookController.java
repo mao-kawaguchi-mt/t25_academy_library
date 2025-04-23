@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import io.micrometer.common.util.StringUtils;
 import jakarta.validation.Valid;
 import jp.co.metateam.library.model.Account;
 import jp.co.metateam.library.model.AccountDto;
@@ -60,15 +61,15 @@ public class BookController {
         String isbnCheck = bookMstDto.getIsbn();
         
         //タイトル必須
-        if (titleCheck == null || titleCheck.isEmpty()) {
+        if (StringUtils.isEmpty(titleCheck)) {
             result.rejectValue("title", "required", "書籍名は必須です");
         }
         //ISBN必須
-        if (isbnCheck == null || isbnCheck.isEmpty()) {
+        if (StringUtils.isEmpty(isbnCheck)){
             result.rejectValue("isbn", "required", "ISBNは必須です");
         } else {
             //タイトル文字数
-            if (titleCheck.length() >= 255) {
+            if (!StringUtils.isEmpty(titleCheck) && titleCheck.length() > 255) {
             result.rejectValue("title", "length", "書籍名は255字以内で入力してください");
             } else {
                 //ISBN桁数チェック
