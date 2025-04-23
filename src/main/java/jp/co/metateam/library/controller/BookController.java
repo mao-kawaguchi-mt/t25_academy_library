@@ -71,21 +71,21 @@ public class BookController {
             if (titleCheck.length() >= 255) {
             result.rejectValue("title", "length", "書籍名は255字以内で入力してください");
             } else {
-            //ISBN桁数チェック
-            if (isbnCheck.length() != 13) {
-            result.rejectValue("isbn", "length", "ISBNは13桁で入力してください");
-            }
-            //ISBN半角数字チェック
-            if (!isbnCheck.matches("\\d+")) {
-            result.rejectValue("isbn", "format", "ISBNは半角数字で入力してください");
-            } else {
-                //ISBN重複チェック
-                if (bookMstService.isbnExists(isbnCheck)) {
-                result.rejectValue("isbn", "duplicate", "このISBNは既に登録されています");
+                //ISBN桁数チェック
+                if (isbnCheck.length() != 13) {
+                result.rejectValue("isbn", "length", "ISBNは13桁で入力してください");
+                }
+                //ISBN半角数字チェック
+                if (!isbnCheck.matches("\\d+")) {
+                result.rejectValue("isbn", "format", "ISBNは半角数字で入力してください");
+                } else {
+                    //ISBN重複チェック
+                    if (bookMstService.isbnExists(isbnCheck) > 0 ) {
+                    result.rejectValue("isbn", "duplicate", "このISBNは既に登録されています");
+                    }
                 }
             }
         }
-    }
 
         if (result.hasErrors()) {
             return "book/add";
@@ -94,5 +94,5 @@ public class BookController {
         bookMstService.save(bookMstDto);
 
         return "redirect:/book/index";
-        }
+    }
 }

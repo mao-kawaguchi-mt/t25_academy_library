@@ -50,7 +50,7 @@ public class BookMstService {
         bookMstRepository.save(bookMst);
     }
 
-    public boolean isbnExists(String isbn){
+    public int isbnExists(String isbn){
         return bookMstRepository.existsByIsbn(isbn);
     }
    
