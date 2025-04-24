@@ -42,8 +42,17 @@ public class BookMstService {
 
         return bookMstDtoList;
     }
+
+    public void save(BookMstDto bookMstDto) {
+        BookMst bookMst = new BookMst();
+        bookMst.setTitle(bookMstDto.getTitle());
+        bookMst.setIsbn(bookMstDto.getIsbn());
+        bookMstRepository.save(bookMst);
+    }
+
+    public int isbnExists(String isbn){
+        return bookMstRepository.existsByIsbn(isbn);
+    }
+   
     
 }
-
-
-
