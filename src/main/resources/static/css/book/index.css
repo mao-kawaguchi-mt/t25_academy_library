@@ -63,3 +63,36 @@
   color: #0000EE;
 }
 
+.books_table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.books_table th {
+  font-size: 15pt;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #ccc;
+  text-align: left;
+  padding: 8px;
+}
+
+.books_table td {
+  padding: 8px;
+  text-align: left;
+}
+
+.add_button {
+  font-size: 15pt;
+  float: right;
+  background-color: #66cdaa;
+  color: black;
+  padding: 10px 30px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.add_button:hover {
+  background-color: #5cbf9e;
+  text-decoration: none;
+}

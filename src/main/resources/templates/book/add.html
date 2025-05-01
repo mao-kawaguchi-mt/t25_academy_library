@@ -19,16 +19,16 @@
                         <div class="mb30 flexarea">
                             </div>
                                 <div class="mb30 flexarea">
-                                <p style="color: red; font-size: 12pt;">*は必須項目です</p>
-                                <a th:href="@{/book/index}" class="link" style="font-size: 12pt;">← 一覧へ戻る</a>
+                                <p class="required_notice">*は必須項目です</p>
+                                <a th:href="@{/book/index}" class="link">← 一覧へ戻る</a>
                                 </div>
                                 <div class="form-group">
-                                <label for="title"><span style="font-size: 15pt;">書籍名</span><span style="color: red;">*</span></label><br>                    
+                                <label for="title"><span class="form_label">書籍名</span><span class="required_mark">*</span></label><br>                    
                                 <input type="text" id="title" th:field="*{title}" placeholder="書籍名を入力"/><br>
-                                <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error" style="color: red; font-size: 10pt;"></div><br>
-                                <label for="ISBN"><span style="font-size: 15pt;">ISBN</span><span style="color: red;">*</span></label><br>
+                                <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error"></div><br>
+                                <label for="ISBN"><span class="form_label">ISBN</span><span class="required_mark">*</span></label><br>
                                 <input type="text" id="isbn" th:field="*{isbn}" placeholder="ISBNを入力"/><br>
-                                <div th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}" class="error" style="color: red; font-size: 10pt;"></div><br>
+                                <div th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}" class="error"></div><br>
                                 </div>
                                 <div class="mb30 flexarea">
                               <button type="submit">保存</button>
@@ -40,4 +40,4 @@
     </div>
     <div th:replace="~{common :: footer}"></div>
 </body>
- 
+

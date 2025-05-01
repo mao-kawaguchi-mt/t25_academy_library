@@ -38,3 +38,37 @@
   cursor: pointer;
   opacity: 0.6;
 }
+
+.flexarea {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.required_notice {
+  color: red;
+  font-size: 12pt;
+}
+
+.link {
+  font-size: 12pt;
+}
+
+.form_label {
+  font-size: 15pt;
+}
+
+.required_mark {
+  color: red;
+  margin-left: 5px;
+}
+
+.error {
+  color: red;
+  font-size: 10pt;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
